@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function() {
+            $('head').load('head.html')
+            $('#bodys').load('body.html')
+            $('#foots').load('foot.html')
+        })
+    </script>
+    <title>Page1</title>
+
+    <script>
+        sid = [];
+        sname = [];
+        dept = [];
+
+        if (localStorage.getItem('sid') != null &&
+            localStorage.getItem('sid') != null &&
+            localStorage.getItem('sid') != null) {
+
+
+            sid = JSON.parse(localStorage.getItem('sid'))
+            sname = JSON.parse(localStorage.getItem('sname'))
+            dept = JSON.parse(localStorage.getItem('dept'))
+        }
+    </script>
+
+</head>
+
+<body>
+    <div id="bodys"></div>
+    <div class="container d-flex flex-wrap justify-content-center gap-5 mt-2    ">
+        <!-- <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 80px;">     -->
+        <div class="card" style="width: 50rem;">
+            <img src="https://blog.icons8.com/wp-content/uploads/old-uploads/2019/12/memes-with-no-text.png" class="card-img-top" alt="..." style="width: full;height: full;">
+            <div class="card-body">
+                <h5 class="card-title">Student System</h5>
+                <p class="card-text">
+                    <div class="form-floating mb-3">
+                        <input type="number" class="form-control" id="sid" placeholder="">
+                        <label>Student ID</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="sname" placeholder="">
+                        <label>Full Name</label>
+                    </div>
+                    <div class="form-floating mt-3">
+                        <select class="form-select" id="dept" aria-label="Default select example">
+                        <option selected>Choose select Department</option>
+                        <option value="ช่างกล">ช่างกล</option>
+                        <option value="ช่างยนต์">ช่างยนต์</option>
+                        <option value="เทคโนโลยีสารสนเทศ">เทคโนโลยีสารสนเทศ</option>
+                      </select>
+                    </div>
+                </p>
+
+                <button type="submit" class="btn btn-success w-25" onclick="click_submit()">Submit</button>
+                <button type="reset" class="btn btn-primary w-25" onclick="clear_from()">reset</button>
+
+                <table class="table  table-bordered border border-dark border-3 mt-5 table-striped table-hover">
+                    <thead>
+                        <tr>
+
+                            <th scope="col">StudentID</th>
+                            <th scope="col">Fullname</th>
+                            <th scope="col">Department</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <script>
+                            for (let i = 0; i < sid.length; i++) {
+                                document.write('<tr>')
+                                document.write('<td>' + sid[i] + '</td>')
+                                document.write('<td>' + sname[i] + '</td>')
+                                document.write('<td>' + dept[i] + '</td>')
+                                document.write('</tr>')
+
+
+                            }
+                        </script>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        console.log(sid)
+        console.log(sname)
+        console.log(dept)
+
+        function click_submit() {
+            sid.push(document.getElementById('sid').value)
+            sname.push(document.getElementById('sname').value)
+            dept.push(document.getElementById('dept').value)
+
+
+            localStorage.setItem('sid', JSON.stringify(sid))
+            localStorage.setItem('sname', JSON.stringify(sname))
+            localStorage.setItem('dept', JSON.stringify(dept))
+
+            //  clear_from()
+            location.href = 'Page1.html'
+        }
+
+        function clear_from() {
+            document.getElementById('sid').value = ''
+            document.getElementById('sname').value = ''
+            document.getElementById('dept').selectedIndex = 0
+        }
+    </script>
+
+    <div id="foots"></div>
+</body>
+
+</html>
